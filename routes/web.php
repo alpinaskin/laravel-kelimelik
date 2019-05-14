@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('pages.anasayfa');
 });
+
+Route::resource('kelime','KelimeController');
