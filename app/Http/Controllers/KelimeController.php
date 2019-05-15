@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Kelime;
+use DB;
 
 class KelimeController extends Controller
 {
@@ -14,7 +15,11 @@ class KelimeController extends Controller
      */
     public function index()
     {
-        return view('pages.kelime.index');
+        $kelimeler = Kelime::paginate(10);
+        foreach($kelimeler as $kelime){
+            $kelime->tur_id = DB::table('kelime_turu')->where('id', $kelime->tur_id)->value('tur');
+        }
+        return view('pages.kelime.index')->withKelimeler($kelimeler);
     }
 
     /**
