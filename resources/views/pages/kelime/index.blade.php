@@ -3,6 +3,7 @@
     
 <div class="container">
     <h4 class="center">Kelimeler</h4>
+<div class="float right"><a href='{{route('kelime.create')}}' class="waves-effect waves-light blue darken-2 btn">Yeni Kelime Ekle</a></div>
 
     <table class="striped">
         <thead>
@@ -23,7 +24,7 @@
               <td>{{$kelime->anlami}}</td>
               <td>{{$kelime->cumle}}</td>
               <td>{{$kelime->tur_id}}</td>
-              <td><a href="{{ route('kelime.edit',$kelime->id)}}" class="waves-effect waves-light orange darken-4 btn-small">Düzenle</a></td>
+              <td><a href="{{ route('kelime.edit',$kelime->id)}}" class="waves-effect waves-light orange darken-2 btn-small">Düzenle</a></td>
               <td>
                   <form action="{{ route('kelime.destroy', $kelime->id)}}" method="post">
                       @csrf
