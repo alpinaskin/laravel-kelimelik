@@ -13,6 +13,6 @@
 
 Route::get('/', function () {
     return view('pages.anasayfa');
-});
+})->name('anasayfa');
 
 Route::resource('kelime','KelimeController');
