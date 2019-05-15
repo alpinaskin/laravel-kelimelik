@@ -14,4 +14,6 @@ class Kelime extends Model
     protected $fillable = [
         'kelime_adi', 'anlami', 'aciklama', 'kelime_turu',
     ];
+
+    protected $table = 'kelime';
 }

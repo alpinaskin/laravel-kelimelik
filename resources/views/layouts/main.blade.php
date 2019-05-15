@@ -19,5 +19,7 @@
         <footer class="row">
             @include('includes.footer')
         </footer>
+
+        @yield('scripts')
 </body>
 </html>

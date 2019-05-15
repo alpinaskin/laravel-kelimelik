@@ -14,13 +14,16 @@ class CreateKelimeTable extends Migration
     public function up()
     {
         Schema::create('kelime', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('kelime_adi',50);
             $table->string('anlami',50);
-            $table->string('aciklama',100);
-            $table->bigIncrements('tur_id');
-            $table->foreign('tur_id')->references('id')->on('kelime_turu');
+            $table->string('cumle',100);
             $table->timestamps();
+        });
+
+        Schema::table('kelime', function($table){
+            $table->integer('tur_id')->unsigned();
+            $table->foreign('tur_id')->references('id')->on('kelime_turu');
         });
     }
 

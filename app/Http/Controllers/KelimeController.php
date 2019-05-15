@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Kelime;
 
 class KelimeController extends Controller
 {
@@ -13,7 +14,7 @@ class KelimeController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.kelime.index');
     }
 
     /**
@@ -34,8 +35,19 @@ class KelimeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return redirect('/');
+        $request->validate([
+            'kelime' => 'required|min:2|max:25',
+            'anlam' => 'required|min:2|max:25',
+            'cumle' => 'required|min:5|max:100',
+            'kelime_tur' => 'required'
+        ]);
+        $kelime = new Kelime();
+        $kelime->kelime_adi = $request->get('kelime');
+        $kelime->anlami = $request->get('anlam');
+        $kelime->cumle = $request->get('cumle');
+        $kelime->tur_id = $request->get('kelime_tur');
+        $kelime->save();
+        return redirect('/kelime');
     }
 
     /**
@@ -57,7 +69,8 @@ class KelimeController extends Controller
      */
     public function edit($id)
     {
-        return view('pages.kelime.edit');
+        $kelime = Kelime::find($id);
+        return view('pages.kelime.edit')->withKelime($kelime);
     }
 
     /**
@@ -68,8 +81,22 @@ class KelimeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $kelime = Kelime::find($id);
+
+        $request->validate([
+            'kelime' => 'required|min:2|max:25',
+            'anlam' => 'required|min:2|max:25',
+            'cumle' => 'required|min:5|max:100',
+            'kelime_tur' => 'required'
+        ]);
+
+        $kelime->kelime_adi = $request->get('kelime');
+        $kelime->anlami = $request->get('anlam');
+        $kelime->cumle = $request->get('cumle');
+        $kelime->tur_id = $request->get('kelime_tur');
+        $kelime->save();
+        return redirect('/kelime');
     }
 
     /**
