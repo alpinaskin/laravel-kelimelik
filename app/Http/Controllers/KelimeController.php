@@ -112,6 +112,8 @@ class KelimeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kelime = Kelime::find($id);
+        $kelime->delete();
+        return redirect('/kelime');
     }
 }
