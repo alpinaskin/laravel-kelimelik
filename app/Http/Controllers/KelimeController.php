@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Kelime;
+use Illuminate\Support\Facades\Auth;
 use DB;
 
 class KelimeController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,8 +33,10 @@ class KelimeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('pages.kelime.create');
+    {   
+        if(Auth::user()->isAdmin)
+            return view('pages.kelime.create');
+        return redirect('kelime');
     }
 
     /**
@@ -40,18 +47,20 @@ class KelimeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'kelime' => 'required|min:2|max:25',
-            'anlam' => 'required|min:2|max:25',
-            'cumle' => 'required|min:5|max:100',
-            'kelime_tur' => 'required'
-        ]);
-        $kelime = new Kelime();
-        $kelime->kelime_adi = $request->get('kelime');
-        $kelime->anlami = $request->get('anlam');
-        $kelime->cumle = $request->get('cumle');
-        $kelime->tur_id = $request->get('kelime_tur');
-        $kelime->save();
+        if(Auth::user()->isAdmin){
+            $request->validate([
+                'kelime' => 'required|min:2|max:25',
+                'anlam' => 'required|min:2|max:25',
+                'cumle' => 'required|min:5|max:100',
+                'kelime_tur' => 'required'
+            ]);
+            $kelime = new Kelime();
+            $kelime->kelime_adi = $request->get('kelime');
+            $kelime->anlami = $request->get('anlam');
+            $kelime->cumle = $request->get('cumle');
+            $kelime->tur_id = $request->get('kelime_tur');
+            $kelime->save();
+        }
         return redirect('/kelime');
     }
 
@@ -73,9 +82,13 @@ class KelimeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $kelime = Kelime::find($id);
-        return view('pages.kelime.edit')->withKelime($kelime);
+    {   
+        if(Auth::user()->isAdmin){
+            $kelime = Kelime::find($id);
+            return view('pages.kelime.edit')->withKelime($kelime);
+        }else{
+            return redirect('kelime');
+        }
     }
 
     /**
@@ -87,20 +100,23 @@ class KelimeController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $kelime = Kelime::find($id);
+        if(Auth::user()->isAdmin){
+            $kelime = Kelime::find($id);
 
-        $request->validate([
-            'kelime' => 'required|min:2|max:25',
-            'anlam' => 'required|min:2|max:25',
-            'cumle' => 'required|min:5|max:100',
-            'kelime_tur' => 'required'
-        ]);
+            $request->validate([
+                'kelime' => 'required|min:2|max:25',
+                'anlam' => 'required|min:2|max:25',
+                'cumle' => 'required|min:5|max:100',
+                'kelime_tur' => 'required'
+            ]);
 
-        $kelime->kelime_adi = $request->get('kelime');
-        $kelime->anlami = $request->get('anlam');
-        $kelime->cumle = $request->get('cumle');
-        $kelime->tur_id = $request->get('kelime_tur');
-        $kelime->save();
+            $kelime->kelime_adi = $request->get('kelime');
+            $kelime->anlami = $request->get('anlam');
+            $kelime->cumle = $request->get('cumle');
+            $kelime->tur_id = $request->get('kelime_tur');
+            $kelime->save();
+        }
+        
         return redirect('/kelime');
     }
 
@@ -111,9 +127,11 @@ class KelimeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $kelime = Kelime::find($id);
-        $kelime->delete();
+    {   
+        if(Auth::user()->isAdmin){
+            $kelime = Kelime::find($id);
+            $kelime->delete();
+        }
         return redirect('/kelime');
     }
 }
