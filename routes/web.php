@@ -16,3 +16,7 @@ Route::get('/', function () {
 })->name('anasayfa');
 
 Route::resource('kelime','KelimeController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -1,4 +1,9 @@
 @extends('layouts.main')
 @section('content')
-    Anasayfa
+@auth
+<div class="card-body">
+    Giriş yapıldı
+</div>
+@endauth
+
 @endsection
