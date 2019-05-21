@@ -19,9 +19,7 @@
               <th>Örnek Cümle</th>
               <th>Kelime Türü</th>
               @auth
-                  @if(auth()->user()->isAdmin)
-                    <th colspan="2">İşlemler</th>
-                  @endif
+                 <th colspan="2">İşlemler</th>
               @endauth
           </tr>
         </thead>
@@ -33,7 +31,7 @@
               <td>{{$kelime->kelime_adi}}</td>
               <td>{{$kelime->anlami}}</td>
               <td>{{$kelime->cumle}}</td>
-              <td>{{$kelime->tur_id}}</td>
+              <td>{{$kelime->kelime_turu()->first()->tur}}</td>
 
               @auth
                   @if(auth()->user()->isAdmin)
@@ -44,7 +42,24 @@
                             @method('DELETE')
                             <button class="waves-effect waves-light red darken-4 btn-small" type="submit">SİL</button>
                           </form>
-                    </td>      
+                    </td>
+                    @else
+                    
+                    @if(!Auth::user()->ogrenilecekKelimeler()->where('kelime_id', $kelime->id)->exists())
+                      <td>
+                        <form action="{{ route('kelime.ogrenilecekKelimeKaydet', $kelime->id)}}" method="POST">
+                            @csrf
+                            <button class="waves-effect waves-light blue darken-4 btn-small" type="submit">Öğrenilecek Kelime Ekle</button>
+                        </form>
+                      </td>
+                      @else
+                      <td>
+                        <form action="{{ route('kelime.ogrenilecekKelimeCikar', $kelime->id)}}" method="POST">
+                            @csrf
+                            <button class="waves-effect waves-light red darken-4 btn-small" type="submit">Kelime Çıkar</button>
+                          </form>
+                      </td>
+                      @endif
                   @endif
               @endauth
               

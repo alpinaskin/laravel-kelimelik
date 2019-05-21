@@ -11,12 +11,22 @@
 |
 */
 
+//Get routes 
+
 Route::get('/', function () {
     return view('pages.anasayfa');
 })->name('anasayfa');
 
-Route::resource('kelime','KelimeController');
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('kelime/ogrenilecekkelimeler', 'KelimeController@ogrenilecekKelimelerIndex');
+
+// Post Routes
+
+Route::post('kelime/ara', 'KelimeController@ara')->name('kelime.search');
+Route::post('kelime/ogrkelimekayit/{id}', 'KelimeController@ogrenilecekKelimeKaydet')->name('kelime.ogrenilecekKelimeKaydet');
+Route::post('kelime/ogrkelimecikar/{id}', 'KelimeController@ogrenilecekKelimeCikar')->name('kelime.ogrenilecekKelimeCikar');
+// Route resources
+
+Route::resource('kelime','KelimeController');
+Route::resource('test', 'TestController');
+Auth::routes();

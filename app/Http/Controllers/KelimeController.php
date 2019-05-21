@@ -9,7 +9,6 @@ use DB;
 
 class KelimeController extends Controller
 {
-
     public function __construct(){
         $this->middleware('auth');
     }
@@ -21,9 +20,7 @@ class KelimeController extends Controller
     public function index()
     {
         $kelimeler = Kelime::paginate(10);
-        foreach($kelimeler as $kelime){
-            $kelime->tur_id = DB::table('kelime_turu')->where('id', $kelime->tur_id)->value('tur');
-        }
+        
         return view('pages.kelime.index')->withKelimeler($kelimeler);
     }
 
@@ -133,5 +130,45 @@ class KelimeController extends Controller
             $kelime->delete();
         }
         return redirect('/kelime');
+    }
+
+    public function ara(Request $request){
+        $request->validate([
+            'search' => 'required|min:2|max:50'
+        ]);
+        $aranacak = $request->get('search');
+
+        $kelimeler = 
+        Kelime::query()
+                ->where('kelime_adi', 'LIKE', '%' . $aranacak . '%')
+                ->orWhere('anlami', 'LIKE', '%' . $aranacak . '%')
+                ->paginate(5);
+        
+        return view('pages.kelime.index')->withKelimeler($kelimeler);
+    }
+    // Öğrenilecek Kelimeler ->
+    public function ogrenilecekKelimeKaydet($id){
+        $kelime = Kelime::find($id);
+        $user = Auth::user();
+        $user->ogrenilecekKelimeler()->syncWithoutDetaching($kelime);
+
+        return redirect('kelime');
+    }
+
+    public function ogrenilecekKelimeCikar($id){
+        $kelime = Kelime::find($id);
+        $user = Auth::user();
+        
+        $user->ogrenilecekKelimeler()->detach($kelime);
+
+        return redirect('kelime');
+    }
+
+    public function ogrenilecekKelimelerIndex(){
+        $user = Auth::user();
+
+        $kelimeler = $user->ogrenilecekKelimeler()->get();
+
+        return view('pages.kelime.ogrenilecek.index')->withKelimeler($kelimeler);
     }
 }

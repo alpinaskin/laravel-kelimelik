@@ -16,4 +16,25 @@ class Kelime extends Model
     ];
 
     protected $table = 'kelime';
+
+    public function kelime_turu(){
+        return $this->belongsTo('App\KelimeTuru','tur_id');
+    }
+
+    public function ogrenilecekKelimeKullanicilar(){
+        return $this->belongsToMany('App\User', 'ogrenilecek_kelimeler', 'kelime_id', 'user_id');
+    }
+
+    public function randomKelime(){
+        // 
+    }
+
+    public function randomCevap(){
+        // 
+    }
+
+    public function dogruCevap($kelime){
+        // 
+    }
+    
 }
