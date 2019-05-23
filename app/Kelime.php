@@ -25,6 +25,9 @@ class Kelime extends Model
         return $this->belongsToMany('App\User', 'ogrenilecek_kelimeler', 'kelime_id', 'user_id');
     }
 
+    public function soru(){
+        return $this->belongsTo('App\Soru');
+    }
     public function randomKelime(){
         // 
     }

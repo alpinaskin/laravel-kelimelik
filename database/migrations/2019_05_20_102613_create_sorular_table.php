@@ -15,10 +15,10 @@ class CreateSorularTable extends Migration
     {
         Schema::create('sorular', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('test_id')->unsigned();
-            $table->integer('kelime_id')->unsigned();
-            $table->integer('soru_tip_id')->unsigned();
-            $table->integer('cevaplar_id')->unsigned();
+            $table->integer('test_id')->unsigned()->nullable();
+            $table->integer('kelime_id')->unsigned()->nullable();
+            $table->integer('soru_tip_id')->unsigned()->nullable();
+            $table->integer('cevaplar_id')->unsigned()->nullable();
         });
     }
 

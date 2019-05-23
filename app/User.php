@@ -40,4 +40,8 @@ class User extends Authenticatable
     public function ogrenilecekKelimeler(){
         return $this->belongsToMany('App\Kelime','ogrenilecek_kelimeler', 'user_id', 'kelime_id');
     }
+
+    public function test(){
+        return $this->hasMany('App\Test');
+    }
 }

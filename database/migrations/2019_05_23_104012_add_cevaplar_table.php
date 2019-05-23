@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestlerTable extends Migration
+class AddCevaplarTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateTestlerTable extends Migration
      */
     public function up()
     {
-        Schema::create('testler', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('sorular_id')->unsigned()->nullable();
-            $table->bigInteger('user_id')->unsigned();
-            $table->timestamps();
+        Schema::table('cevaplar', function($table){
+            $table->integer('soru_id')->unsigned()->nullable();
         });
     }
 
@@ -28,6 +25,6 @@ class CreateTestlerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testler');
+        Schema::dropColumn('soru_id');
     }
 }
