@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignSorularTable extends Migration
+class AddOgrenilecekKelimelerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddForeignSorularTable extends Migration
      */
     public function up()
     {
-        Schema::table('sorular', function($table){
-            $table->foreign('test_id')->references('id')->on('testler');
-            $table->foreign('kelime_id')->references('id')->on('kelime');
-            $table->foreign('cevaplar_id')->references('id')->on('cevaplar');
+        Schema::table('ogrenilecek_kelimeler', function($table){
+            $table->boolean('ogrenildi')->default(0);
         });
     }
 
@@ -27,6 +25,8 @@ class AddForeignSorularTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('ogrenilecek_kelimeler', function($table){
+            $table->dropColumn('ogrenildi');
+        });
     }
 }

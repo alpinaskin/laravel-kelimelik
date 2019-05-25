@@ -26,18 +26,7 @@ class Kelime extends Model
     }
 
     public function soru(){
-        return $this->belongsTo('App\Soru');
-    }
-    public function randomKelime(){
-        // 
-    }
-
-    public function randomCevap(){
-        // 
-    }
-
-    public function dogruCevap($kelime){
-        // 
+        return $this->hasMany('App\Soru');
     }
     
 }

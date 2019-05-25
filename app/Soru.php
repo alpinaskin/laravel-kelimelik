@@ -13,7 +13,11 @@ class Soru extends Model
         return $this->belongsTo('App\Test');
     }
 
-    public function ogrenilecekKelime(){
-        return $this->hasOne('App\Kelime');
+    public function kelime(){
+        return $this->belongsTo('App\Kelime');
+    }
+
+    public function cevap(){
+        return $this->hasMany('App\Cevap');
     }
 }
