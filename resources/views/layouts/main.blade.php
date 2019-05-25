@@ -16,7 +16,7 @@
     
         </div>
     
-        <footer class="row">
+        <footer class="page-footer">
             @include('includes.footer')
         </footer>
 

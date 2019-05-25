@@ -14,30 +14,32 @@
 @endauth
 
 <div class="col s6">
-    <div class="card blue-grey darken-1">
-        <div class="card-title center lght-blue">Öğrendiğin Kelimeler</div>
-        <div class="card-content">
-            10
+    <div class="card red accent-1">
+        <div class="card-title center">Öğrendiğin Kelimeler</div>
+        <div class="card-content center">
+            <h3>10</h3>
         </div>
     </div>
 </div>
 
 <div class="col s6">
-    <div class="card blue-grey darken-1">
-        <div class="card-title center blue">
-            aa
+    <div class="card blue accent-1">
+        <div class="card-title center">
+            Test Ekranına Git
         </div>
-        <div class="card-content">
-            TEST
+        <div class="card-content center">
+            <h3><a href="{{route('test.index')}}" class="btn indigo accent-4">TEST</a></h3>
         </div>
     </div>
 </div>
 
 <div class="col s6">
-    <div class="card blue-grey darken-1">
-        <h4></h4>
-        <div class="card-content">
-            KELİME
+    <div class="card orange accent-3">
+        <div class="card-title center">
+            Öğrenilecek Kelime Ekle
+        </div>
+        <div class="card-content center">
+            <h3><a href="{{route('kelime.index')}}" class="btn indigo accent-4">EKLE</a></h3>
         </div>
     </div>
 </div>
