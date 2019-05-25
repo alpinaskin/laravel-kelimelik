@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row ">
-        <div class="col s12 m6 offset-m3">
+        <div class="col s12 m6 offset-m4">
             <div class="card">
                 <div class="card-title">{{ __('Şifreyi Sıfırla') }}</div>
 
@@ -38,7 +38,6 @@
                         <div class="form-field row">
                             <label for="password-confirm">{{ __('Şifreyi Onayla') }}</label>
                                 <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
-                            </div>
                         </div>
 
                         <div class="form-field row mb-0">
