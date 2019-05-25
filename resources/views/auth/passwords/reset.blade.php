@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="row ">
-        <div class="col s12 m6 offset-m4">
+        <div class="col s12 m6 offset-m3">
             <div class="card">
-                <div class="card-title">{{ __('Şifreyi Sıfırla') }}</div>
+                <div class="card-title center">{{ __('Şifreyi Sıfırla') }}</div>
 
                 <div class="card-content">
                     <form method="POST" action="{{ route('password.update') }}">
@@ -26,7 +26,7 @@
 
                         <div class="form-field row">
                             <label for="password">{{ __('Şifre') }}</label>
-                                <input id="password" type="password" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" @error('password') is-invalid @enderror name="password" required autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -40,8 +40,8 @@
                                 <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
                         </div>
 
-                        <div class="form-field row mb-0">
-                            <div class="col m6 offset-m4">
+                        <div class="form-field row">
+                            <div class="center">
                                 <button type="submit" class="btn">
                                     {{ __('Şifreyi Sıfırla') }}
                                 </button>
