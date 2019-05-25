@@ -4,7 +4,7 @@
     <div class="row ">
         <div class="col s12 m6 offset-m3">
             <div class="card">
-                <div class="card-title">{{ __('Reset Password') }}</div>
+                <div class="card-title">{{ __('Şifreyi Sıfırla') }}</div>
 
                 <div class="card-content">
                     <form method="POST" action="{{ route('password.update') }}">
@@ -13,7 +13,7 @@
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-field row">
-                            <label for="email">{{ __('E-Mail Address') }}</label>
+                            <label for="email">{{ __('E-Mail Adresi') }}</label>
 
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
 
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-field row">
-                            <label for="password">{{ __('Password') }}</label>
+                            <label for="password">{{ __('Şifre') }}</label>
                                 <input id="password" type="password" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
@@ -36,15 +36,15 @@
                         </div>
 
                         <div class="form-field row">
-                            <label for="password-confirm">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm">{{ __('Şifreyi Onayla') }}</label>
                                 <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 
                         <div class="form-field row mb-0">
                             <div class="col m6 offset-m4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
+                                <button type="submit" class="btn">
+                                    {{ __('Şifreyi Sıfırla') }}
                                 </button>
                             </div>
                         </div>
