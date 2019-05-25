@@ -8,6 +8,7 @@ use App\User;
 use App\Soru;
 use App\Cevap;
 use App\Test;
+use DB;
 use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
@@ -109,7 +110,8 @@ class TestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $i=0;
         $dogru = 0;
         $yanlis = 0;
         // test id testi bul
@@ -119,9 +121,14 @@ class TestController extends Controller
 
         // request cevapları eşle
         foreach($sorular as $soru){
-
+            $i++;
             // cevapla kıyasla
+            if($soru->cevap()->first()->dogru_cevap == $request[$i]){
 
+                DB::table('ogrenilecek_kelimeler')->where('kelime_id','=', $soru->kelime()->first()->id)->update([
+                    'ogrenildi' => true
+                ]);
+            }
         }
 
         // ..
