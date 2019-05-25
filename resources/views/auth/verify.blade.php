@@ -4,17 +4,17 @@
     <div class="row">
         <div class="col m6 offset-m3">
             <div class="card">
-                <div class="card-title">{{ __('Verify Your Email Address') }}</div>
+                <div class="card-title">{{ __('Doğrulama ') }}</div>
 
                 <div class="card-content">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
+                            {{ __('E-mail adresine güncelleme linki yollandı.') }}
                         </div>
                     @endif
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
+                    {{ __('Devam etmeden önce maillerinize bakın.') }}
+                    {{ __('E-mail size ulaşmadıysa') }}, <a href="{{ route('verification.resend') }}">{{ __('buraya tıklayın.') }}</a>.
                 </div>
             </div>
         </div>
