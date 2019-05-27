@@ -96,9 +96,13 @@ class TestController extends Controller
             $soru->cevaplar_id = $cevap->id;
             $soru->soru_tip_id = 1;
 
-            $soru->save();
-            $cevap->soru_id = $soru->id;
-            $cevap->save();
+            // Eğer kelime zaten öğrenilmediyse kaydet
+            $ogrenildi = DB::table('ogrenilecek_kelimeler')->where('kelime_id','=', $soru->kelime()->first()->id)->get();
+            if(!$ogrenildi->first()->ogrenildi){
+                $soru->save();
+                $cevap->soru_id = $soru->id;
+                $cevap->save();
+            }
         }
         return view('pages.test.index')->withTest($test);
     }
@@ -113,7 +117,6 @@ class TestController extends Controller
     {   
         $i=0;
         $dogru = 0;
-        $yanlis = 0;
         // test id testi bul
             $test = Test::find($request->test_id);
         // testin sorularını getir
@@ -122,16 +125,29 @@ class TestController extends Controller
         // request cevapları eşle
         foreach($sorular as $soru){
             $i++;
+            // DB verilen cevap db'ye kaydet
+            DB::table('verilen_cevaplar')->insert([
+                'cevap' => $request[$i],
+                'soru_id' => $soru->id
+            ]);
             // cevapla kıyasla
             if($soru->cevap()->first()->dogru_cevap == $request[$i]){
-
+                // doğru ise
+                $dogru++;
                 DB::table('ogrenilecek_kelimeler')->where('kelime_id','=', $soru->kelime()->first()->id)->update([
                     'ogrenildi' => true
                 ]);
             }
         }
 
-        // ..
+        // testteki doğru sayısını güncelle
+        DB::table('testler')->where('id', '=', $test->id)->update([
+            'dogru_sayisi' => $dogru
+        ]);
+
+        // view döndür
+
+        return $this->show($test->id);
     }
 
     /**
@@ -142,7 +158,16 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        //
+        //Test bul
+        $test = Test::find($id);
+        $sorular = $test->soru()->get()->all();
+        $verilen_cevaplar = array();
+    
+        foreach($sorular as $soru){
+            $cevap = DB::table('verilen_cevaplar')->where('soru_id','=',$soru->id)->get();
+            array_push($verilen_cevaplar,$cevap->first()->cevap);
+        }
+        return view('pages.test.result')->withSorular($sorular)->withCevaplar($verilen_cevaplar);
     }
 
     /**
