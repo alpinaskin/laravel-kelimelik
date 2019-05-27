@@ -11,23 +11,27 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Tarih</th>
-            <th colspan="2">İşlemler</th> 
+            <th>Test Tarihi</th>
+            <th>Doğru Sayısı</th>
+            <th>İşlem</th> 
           </tr>
         </thead>
     
         <tbody>
 
-        @foreach (Auth::user()->test as $test)
+        @foreach ($testler as $test)
         <tr>
             <td>{{$test->id}}</td>
             <td>{{$test->created_at}}</td>
+            <td><span class="green-text">{{$test->dogru_sayisi}}</span></td>
             <td>Göster</td>
-            <td></td>
         </tr>
         @endforeach
           
         </tbody>
       </table>
+      <div class="col s12 center">
+        {{$testler->links()}}
+      </div>
 </div>
 @endsection

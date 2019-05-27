@@ -68,6 +68,10 @@
           
         </tbody>
       </table>
+
+      <div class="col s12 center">
+        {{$kelimeler->links()}}
+      </div>
 </div>
 
 @endsection

@@ -22,8 +22,8 @@ class TestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        return view('pages.test.show');
+    {   $testler = Auth::user()->test()->paginate(20);
+        return view('pages.test.show')->withTestler($testler);
     }
 
     public function testOlustur(){
