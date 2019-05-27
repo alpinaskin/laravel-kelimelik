@@ -56,6 +56,10 @@
                                             {{ __('Şifreni mi unuttun?') }}
                                         </a>
                                     @endif
+
+                                    <a class="btn btn-link" href="{{ route('register') }}">
+                                            {{ __('Üye Ol') }}
+                                    </a>
                                 </div>
                             </div>
                         </form>

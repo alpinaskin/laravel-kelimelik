@@ -6,18 +6,19 @@
 @auth
 <div class="card-body">
     Giriş yapıldı
-
    @if (auth()->user()->isAdmin == 1)
        Adminsin
    @endif
 </div>
 @endauth
 
+@auth
+
 <div class="col s6">
     <div class="card red accent-1">
         <div class="card-title center">Öğrendiğin Kelimeler</div>
         <div class="card-content center">
-            <h3>10</h3>
+            <h3>{{$ogrenilen}}</h3>
         </div>
     </div>
 </div>
@@ -43,6 +44,7 @@
         </div>
     </div>
 </div>
+@endauth
 
 </div>
 @endsection

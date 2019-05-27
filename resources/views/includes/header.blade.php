@@ -3,7 +3,7 @@
     <div class="nav-wrapper container">
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="{{url('kelime')}}">Kelimeler</a></li>
-        <li><a href="#">Test</a></li>
+        <li><a href="{{url('test')}}">Test</a></li>
         
         @if (Auth::check())
         <li><a href="{{ route('logout') }}"

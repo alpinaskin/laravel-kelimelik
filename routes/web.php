@@ -13,9 +13,7 @@
 
 //Get routes 
 
-Route::get('/', function () {
-    return view('pages.anasayfa');
-})->name('anasayfa');
+Route::get('/', 'AnasayfaController@index')->name('anasayfa');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('kelime/ogrenilecekkelimeler', 'KelimeController@ogrenilecekKelimelerIndex');

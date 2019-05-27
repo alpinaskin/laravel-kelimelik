@@ -72,7 +72,7 @@ class TestController extends Controller
         $test = Auth::user()->test()->create();
         
         // Random öğrenilecek kelime
-        $kelimeler = Auth::user()->ogrenilecekKelimeler()->inRandomOrder()->take(2)->get();
+        $kelimeler = Auth::user()->ogrenilecekKelimeler()->inRandomOrder()->take(20)->get();
         
         // yeni soru oluşturuldu
 
@@ -134,8 +134,52 @@ class TestController extends Controller
             if($soru->cevap()->first()->dogru_cevap == $request[$i]){
                 // doğru ise
                 $dogru++;
+                $ogrenilecek_kelime = DB::table('ogrenilecek_kelimeler')->where('kelime_id', '=',$soru->kelime->id)->get();
+                
+                if(($ogrenilecek_kelime->first()->tarih_ucuncu != null)) {
+                    
+                    $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $ogrenilecek_kelime->first()->tarih_ucuncu);
+                    $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', now());
+                    $diff_in_days = $to->diffInDays($from);
+                    
+                    if($diff_in_days >= 30 ){
+                        DB::table('ogrenilecek_kelimeler')->where('kelime_id','=', $soru->kelime()->first()->id)->update([
+                            'ogrenildi' => true
+                        ]);
+                    }
+                }else if(($ogrenilecek_kelime->first()->tarih_ikinci != null)){
+                    
+                    $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $ogrenilecek_kelime->first()->tarih_ikinci);
+                    $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', now());
+                    $diff_in_days = $to->diffInDays($from);
+                    
+                    if($diff_in_days >= 7 ){
+                        DB::table('ogrenilecek_kelimeler')->where('kelime_id','=', $soru->kelime()->first()->id)->update([
+                            'tarih_ucuncu' => now()
+                        ]);
+                    }
+                    
+                }else if(($ogrenilecek_kelime->first()->tarih_ilk != null)){
+                    
+                    $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $ogrenilecek_kelime->first()->tarih_ilk);
+                    $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', now());
+                    $diff_in_days = $to->diffInDays($from);
+                    
+                    if($diff_in_days >= 1 ){
+                        DB::table('ogrenilecek_kelimeler')->where('kelime_id','=', $soru->kelime()->first()->id)->update([
+                            'tarih_ikinci' => now()
+                        ]);     
+                    }
+                }else{
+                    DB::table('ogrenilecek_kelimeler')->where('kelime_id','=', $soru->kelime()->first()->id)->update([
+                        'tarih_ilk' => now()
+                    ]);
+                }
+            }else{
                 DB::table('ogrenilecek_kelimeler')->where('kelime_id','=', $soru->kelime()->first()->id)->update([
-                    'ogrenildi' => true
+                    'tarih_ilk' => null,
+                    'tarih_ikinci' => null,
+                    'tarih_ucuncu' => null
                 ]);
             }
         }

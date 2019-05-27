@@ -12,8 +12,8 @@
           <tr>
             <th>#</th>
             <th>Test Tarihi</th>
-            <th>Doğru Sayısı</th>
             <th>İşlem</th> 
+            <th>Doğru Sayısı</th>
           </tr>
         </thead>
     
@@ -23,8 +23,8 @@
         <tr>
             <td>{{$test->id}}</td>
             <td>{{$test->created_at}}</td>
+            <td><a href="{{route('test.show',$test->id)}}" class="btn orange darken-1">{{__('Sonucu Göster')}}</a></td>
             <td><span class="green-text">{{$test->dogru_sayisi}}</span></td>
-            <td>Göster</td>
         </tr>
         @endforeach
           
