@@ -70,7 +70,7 @@
       </table>
 
       <div class="col s12 center">
-        {{$kelimeler->links()}}
+        {{$kelimeler->links('vendor.pagination.materializecss')}}
       </div>
 </div>
 

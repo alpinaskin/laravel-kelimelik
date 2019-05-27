@@ -31,7 +31,7 @@
         </tbody>
       </table>
       <div class="col s12 center">
-        {{$testler->links()}}
+        {{$testler->links('vendor.pagination.materializecss')}}
       </div>
 </div>
 @endsection
