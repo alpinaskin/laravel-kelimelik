@@ -22,7 +22,7 @@ Route::get('kelime/ogrenilecekkelimeler', 'KelimeController@ogrenilecekKelimeler
 
 // Post Routes
 
-Route::post('kelime/ara', 'KelimeController@ara')->name('kelime.search');
+Route::get('kelime/ara', 'KelimeController@ara')->name('kelime.search');
 Route::post('kelime/ogrkelimekayit/{id}', 'KelimeController@ogrenilecekKelimeKaydet')->name('kelime.ogrenilecekKelimeKaydet');
 Route::post('kelime/ogrkelimecikar/{id}', 'KelimeController@ogrenilecekKelimeCikar')->name('kelime.ogrenilecekKelimeCikar');
 // Route resources

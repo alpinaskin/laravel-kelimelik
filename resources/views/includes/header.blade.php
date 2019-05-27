@@ -22,7 +22,7 @@
         @endif
 
       </ul>
-      <form action="{{route('kelime.search')}}" method="POST" style="position:absolute;margin-left:10%; width:50%">
+      <form action="{{route('kelime.search')}}" method="GET" style="position:absolute;margin-left:10%; width:50%">
         @csrf
           <div class="input-field">
               <input id="search" type="search" name="search" placeholder="Kelime Ara">
