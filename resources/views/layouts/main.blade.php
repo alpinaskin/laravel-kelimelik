@@ -3,7 +3,7 @@
 <head>
     @include('includes.head')
 </head>
-<body>
+<body >
     
 
         <header class="row">
@@ -16,7 +16,7 @@
     
         </div>
     
-        <footer class="page-footer" style="bottom:0;position:fixed;width:100%">
+        <footer class="page-footer" style="bottom:0;position: fixed;width:100%">
             @include('includes.footer')
         </footer>
 

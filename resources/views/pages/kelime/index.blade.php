@@ -49,14 +49,14 @@
                       <td>
                         <form action="{{ route('kelime.ogrenilecekKelimeKaydet', $kelime->id)}}" method="POST">
                             @csrf
-                            <button class="waves-effect waves-light blue darken-4 btn-small" type="submit">Öğrenilecek Kelime Ekle</button>
+                            <button class="waves-effect waves-light blue darken-4 btn-small" style="position:inherit" type="submit">Öğrenilecek Kelime Ekle</button>
                         </form>
                       </td>
                       @else
                       <td>
                         <form action="{{ route('kelime.ogrenilecekKelimeCikar', $kelime->id)}}" method="POST">
                             @csrf
-                            <button class="waves-effect waves-light red darken-4 btn-small" type="submit">Kelime Çıkar</button>
+                            <button class="waves-effect waves-light red darken-4 btn-small" style="position:inherit" type="submit">Kelime Çıkar</button>
                           </form>
                       </td>
                       @endif
