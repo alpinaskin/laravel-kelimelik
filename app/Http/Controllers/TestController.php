@@ -36,13 +36,13 @@ class TestController extends Controller
         // yeni soru oluşturuldu
 
         foreach($kelimeler as $kelime){
-            $yanlis_cevaplar = Kelime::inRandomOrder()->where('kelime_adi', '!=', $kelime->kelime_adi)->take(3)->get('kelime_adi')->toArray();
-            
+            $yanlis_cevaplar = Kelime::inRandomOrder()->where('kelime_adi', '!=', $kelime->kelime_adi)->take(4)->get('kelime_adi')->toArray();
             $data = [
                 'dogru_cevap' => $kelime->kelime_adi,
                 'yanlis1_cevap' => reset($yanlis_cevaplar[0]),
                 'yanlis2_cevap' => reset($yanlis_cevaplar[1]),
-                'yanlis3_cevap' => reset($yanlis_cevaplar[2])                 
+                'yanlis3_cevap' => reset($yanlis_cevaplar[2]),
+                'yanlis4_cevap' => reset($yanlis_cevaplar[3])                 
             ];
             
             // Cevap oluştur
@@ -77,18 +77,18 @@ class TestController extends Controller
         // yeni soru oluşturuldu
 
         foreach($kelimeler as $kelime){
-            $yanlis_cevaplar = Kelime::inRandomOrder()->where('kelime_adi', '!=', $kelime->kelime_adi)->take(3)->get('kelime_adi')->toArray();
+            $yanlis_cevaplar = Kelime::inRandomOrder()->where('kelime_adi', '!=', $kelime->kelime_adi)->take(4)->get('kelime_adi')->toArray();
             
             $data = [
                 'dogru_cevap' => $kelime->kelime_adi,
                 'yanlis1_cevap' => reset($yanlis_cevaplar[0]),
                 'yanlis2_cevap' => reset($yanlis_cevaplar[1]),
-                'yanlis3_cevap' => reset($yanlis_cevaplar[2])                 
+                'yanlis3_cevap' => reset($yanlis_cevaplar[2]),              
             ];
             
             // Cevap oluştur
             $cevap = Cevap::create($data);
-            
+            $cevap->yanlis4_cevap = reset($yanlis_cevaplar[3]);
             // Soru oluştur
             $soru = new Soru();
             $soru->kelime_id = $kelime->id;
